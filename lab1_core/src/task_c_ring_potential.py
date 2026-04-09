@@ -27,11 +27,11 @@ def ring_potential_grid(y_grid, z_grid, x0: float = 0.0, a: float = 1.0, q: floa
     z_grid = np.array(z_grid)
     
     ny, nz = len(y_grid), len(z_grid)
-    potential = np.zeros((ny, nz))
+    potential = np.zeros((nz, ny))  # 修正形状：(len(zs), len(ys))
     
-    for i, y in enumerate(y_grid):
-        for j, z in enumerate(z_grid):
-            potential[i, j] = ring_potential_point(x0, y, z, a, q, n_phi)
+    for j, z in enumerate(z_grid):
+        for i, y in enumerate(y_grid):
+            potential[j, i] = ring_potential_point(x0, y, z, a, q, n_phi)
     
     return potential
 
